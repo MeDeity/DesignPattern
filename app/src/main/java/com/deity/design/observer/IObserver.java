@@ -1,6 +1,7 @@
 package com.deity.design.observer;
 
 /**
+ * 2017年2月6日23:29:47
  * 观察者接口，也可以做成抽象的，如果有众多的观察者则可以implement或者extend该接口或抽象类
  * Created by Deity on 2017/1/10.
  */

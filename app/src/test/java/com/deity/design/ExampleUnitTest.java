@@ -1,5 +1,7 @@
 package com.deity.design;
 
+import com.deity.design.annotation.Daughter;
+import com.deity.design.annotation.HumanAnnotation;
 import com.deity.design.observer.IObserver;
 import com.deity.design.observer.ISubject;
 import com.deity.design.observer.ObserverImpl;
@@ -10,12 +12,13 @@ import com.deity.design.template.XiMenQingAndPanJinLianImpl;
 
 import org.junit.Test;
 
+import java.lang.reflect.Method;
+
 /**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ * 测试用例
  */
 public class ExampleUnitTest {
+    /**观察者Demo*/
     @Test
     public void ObserverTest(){
         /**
@@ -33,6 +36,7 @@ public class ExampleUnitTest {
         JINRITOUTIAO.notify("2017年到了");
     }
 
+    /**模板模式Demo*/
     @Test
     public void templateTest(){
         AbsMatchMaking 王婆 = new XiMenQingAndPanJinLianImpl();
@@ -40,5 +44,21 @@ public class ExampleUnitTest {
         //小编学习了王婆的经验后，跃跃欲试,毕竟有现成的模板告诉小编 怎么成为一个成功的 媒人，看小编如何撮合读者跟凤姐
         AbsMatchMaking 小编 = new ReaderAndFengJieImpl();
         小编.matchMaking();
+    }
+
+    /**自定义注解Demo*/
+    @Test
+    public void AnnotationTest(){
+        Daughter daughter = new Daughter();
+        Method[] fields = Daughter.class.getDeclaredMethods();
+        for (Method field:fields){
+            if (field.isAnnotationPresent(HumanAnnotation.class)) {
+                HumanAnnotation humanAnnotation = field.getAnnotation(HumanAnnotation.class);
+                daughter.setAge(humanAnnotation.getMyAge());
+                daughter.setBirthday(humanAnnotation.getMyBrithday());
+                daughter.setUserName(humanAnnotation.userName());
+            }
+        }
+        System.out.println(daughter.toString());
     }
 }

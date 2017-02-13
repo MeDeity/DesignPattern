@@ -2,6 +2,10 @@ package com.deity.design;
 
 import com.deity.design.annotation.Daughter;
 import com.deity.design.annotation.HumanAnnotation;
+import com.deity.design.decorator.BuildMan;
+import com.deity.design.decorator.IMan;
+import com.deity.design.decorator.LuxuryCarMan;
+import com.deity.design.decorator.MysteryMan;
 import com.deity.design.observer.IObserver;
 import com.deity.design.observer.ISubject;
 import com.deity.design.observer.ObserverImpl;
@@ -61,5 +65,12 @@ public class ExampleUnitTest {
             }
         }
         System.out.println(daughter.toString());
+    }
+
+    /**装饰者模式*/
+    @Test
+    public void DecoratorTest(){
+        IMan reader = new BuildMan(new LuxuryCarMan(new MysteryMan()));
+        System.out.println("据FBI透露,神秘的读者是一个"+reader.description()+"据悉身价已达$"+reader.worth());
     }
 }

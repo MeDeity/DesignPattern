@@ -1,7 +1,5 @@
 package com.deity.design;
 
-import com.deity.design.annotation.Daughter;
-import com.deity.design.annotation.HumanAnnotation;
 import com.deity.design.decorator.BuildMan;
 import com.deity.design.decorator.IMan;
 import com.deity.design.decorator.LuxuryCarMan;
@@ -13,10 +11,9 @@ import com.deity.design.observer.SubjectImpl;
 import com.deity.design.template.AbsMatchMaking;
 import com.deity.design.template.ReaderAndFengJieImpl;
 import com.deity.design.template.XiMenQingAndPanJinLianImpl;
+import com.example.HumanMessageAnnotation;
 
 import org.junit.Test;
-
-import java.lang.reflect.Method;
 
 /**
  * 测试用例
@@ -52,25 +49,30 @@ public class ExampleUnitTest {
     /**建造者模式*/
 
     /**自定义注解Demo*/
-    @Test
-    public void AnnotationTest(){
-        Daughter daughter = new Daughter();
-        Method[] fields = Daughter.class.getDeclaredMethods();
-        for (Method field:fields){
-            if (field.isAnnotationPresent(HumanAnnotation.class)) {
-                HumanAnnotation humanAnnotation = field.getAnnotation(HumanAnnotation.class);
-                daughter.setAge(humanAnnotation.getMyAge());
-                daughter.setBirthday(humanAnnotation.getMyBrithday());
-                daughter.setUserName(humanAnnotation.userName());
-            }
-        }
-        System.out.println(daughter.toString());
-    }
+//    @Test
+//    public void AnnotationTest(){
+//        Daughter daughter = new Daughter();
+//        Method[] fields = Daughter.class.getDeclaredMethods();
+//        for (Method field:fields){
+//            if (field.isAnnotationPresent(HumanAnnotation.class)) {
+//                HumanAnnotation humanAnnotation = field.getAnnotation(HumanAnnotation.class);
+//                daughter.setAge(humanAnnotation.getMyAge());
+//                daughter.setBirthday(humanAnnotation.getMyBrithday());
+//                daughter.setUserName(humanAnnotation.userName());
+//            }
+//        }
+//        System.out.println(daughter.toString());
+//    }
 
     /**装饰者模式*/
     @Test
     public void DecoratorTest(){
         IMan reader = new BuildMan(new LuxuryCarMan(new MysteryMan()));
         System.out.println("据FBI透露,神秘的读者是一个"+reader.description()+"据悉身价已达$"+reader.worth());
+    }
+    @Test
+    @HumanMessageAnnotation(userName = "KEYTOP",getMyBrithday = "2017-3-8 00:00:00",getMyAge = 10)
+    public void testAnnotation(){
+
     }
 }
